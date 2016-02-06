@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html ng-app="datr">
+	<head>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<link rel="stylesheet" media="screen" href="datr.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+        <!-- SPELLS -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
+        <script src="js/controllers/main.js"></script> <!-- load up our controller -->
+        <script src="js/services/todos.js"></script> <!-- load our todo service -->
+        <script src="js/core.js"></script> <!-- load our main application -->
+        <style>
+            html                    { overflow-y:scroll; }
+            body                    { padding-top:50px; }
+            #todo-list              { margin-bottom:30px; }
+            #todo-form              { margin-bottom:50px; }
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                padding: 12px 16px;
+                z-index: 1;
+            }
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        </style>
+	</head>
+
+<body ng-controller="mainController">
+    <div id = "SiteSlogan" align = "center">
+    <h1>Datr - <h4>"Your Last Chance"</h4></h1>
+    </div>
+    <div id="dropdowns" align = "center">
+		<ul class="nav">
+        <a href="#"></a>
+            <li id="food">
+                <a href="#">Food and Drink</a>
+                <ul class="subnav">
+                     <a ng-click="changeImage('chinese food')">Chinese</a>
+                     <a ng-click="changeImage('japanese food')">Japanese</a>
+                     <a ng-click="changeImage('indian food')">Indian</a>
+                     <a ng-click="changeImage('italian food')">Italian</a>
+                     <a ng-click="changeImage('thai food')">Thai</a>
+                     <a ng-click="changeImage('french food')">French</a>
+                </ul>
+            </li>
+
+            <li id="lit">
+                <a href="#">Literature</a>
+                <ul class="subnav">
+                    <a ng-click="changeImage('mystery literature')">Mystery</a>
+                    <a ng-click="changeImage('romance literature')">Romance</a>
+                    <a ng-click="changeImage('science literature')">Science Fiction</a>
+                    <a ng-click="changeImage('autobiography literature')">Autobiography</a>
+                    <a ng-click="changeImage('historical literature')">Historical</a>
+                    <a ng-click="changeImage('non-fiction literature')">Non-fiction</a>
+                </ul>
+            </li>
+
+            <li id="sports">
+                <a href="#">Sports</a>
+                <ul class="subnav">
+                    <a ng-click="changeImage('basketball')">Basketball</a>
+                    <a ng-click="changeImage('baseball')">Baseball</a>
+                    <a ng-click="changeImage('tennis')">Tennis</a>
+                    <a ng-click="changeImage('gold')">Golf</a>
+                    <a ng-click="changeImage('football')">Football</a>
+                    <a ng-click="changeImage('soccer')">Soccer</a>
+                </ul>
+            </li>
+
+            <li id="games">
+                <a href="#">Games</a>
+                <ul class="subnav">
+                    <a ng-click="changeImage('league of legends')">League of Legends</a>
+                    <a ng-click="changeImage('dota')">DOTA</a>
+                    <a ng-click="changeImage('super smash bros')">Super Smash Bros</a>
+                </ul>
+            </li>
+
+            <li id="entertainment">
+                <a href="#">Movies</a>
+                <ul class="subnav">
+                    <a ng-click="changeImage('action movies')">Action</a>
+                    <a ng-click="changeImage('horror movies')">Horror</a>
+                   	<a ng-click="changeImage('romance movies')">Romance</a>
+                    <a ng-click="changeImage('comedy movies')">Comedy</a>
+                    <a ng-click="changeImage('adventure movies')">Adventure</a>
+                    <a ng-click="changeImage('tragedy movies')">Tragedy</a>
+        		</ul>
+        	</li>
+
+            <li id="hobbies">
+                <a href="#">Hobbies</a>
+                <ul class="subnav">
+                    <a ng-click="changeImage('crafting')">Crafting</a>
+                    <a ng-click="changeImage('gardening')">Gardening</a>
+                   	<a ng-click="changeImage('machinery')">Machinery</a>
+                    <a ng-click="changeImage('painting')">Drawing/Painting</a>
+                    <a ng-click="changeImage('electronics')">Electronics</a>
+                    <a ng-click="changeImage('martial arts')">Martial Arts</a>
+        		</ul>
+        	</li>
+
+            <li id="religion">
+                <a href="#">Religion</a>
+                <ul class="subnav">
+                    <a ng-click="changeImage('buddhism')">Buddhism</a>
+                    <a ng-click="changeImage('catholicism')">Catholicism</a>
+                    <a ng-click="changeImage('islam')">Islam</a>
+                    <a ng-click="changeImage('christianity')">Christianity</a>
+                    <a ng-click="changeImage('hinduism')">Hinduism</a>
+        		</ul>
+        	</li>
+
+             <li id="majors">
+                <a href="#">Majors</a>
+                <ul class="subnav">
+                	<a ng-click="changeImage('business')">Business</a>
+                    <a ng-click="changeImage('engineering')">Engineering</a>
+                    <a ng-click="changeImage('english')">English</a>
+                   	<a ng-click="changeImage('art')">Art</a>
+                    <a ng-click="changeImage('health')">Health and Medicine</a>         
+                    <a ng-click="changeImage('drama')">Drama</a>
+                    <a ng-click="changeImage('politics')">Politics</a>
+        		</ul>
+        	</li>
+
+            <li id="outdoor">
+                <a href="#">Outdoor Activities</a>
+                <ul class="subnav">
+                	<a ng-click="changeImage('biking')">Biking</a>
+                	<a ng-click="changeImage('hiking')">Hiking</a>
+                    <a ng-click="changeImage('jogging')">Jogging</a>
+                    <a ng-click="changeImage('rock climbing')">Rock Climbing</a>
+                    <a ng-click="changeImage('skydiving')">Skydiving</a>
+        		</ul>
+        	</li>
+
+            <li id="autos">
+                <a href="#">Autos</a>
+                <ul class="subnav">
+                    <a ng-click="changeImage('acura')">Acura</a>
+                    <a ng-click="changeImage('buick')">Buick</a>
+                    <a ng-click="changeImage('cadillac')">Cadillac</a>
+                    <a ng-click="changeImage('honda')">Honda</a>
+                    <a ng-click="changeImage('hyundai')">Hyundai</a>
+                    <a ng-click="changeImage('jeep')">Jeep</a>
+                    <a ng-click="changeImage('lexus')">Lexus</a>
+                    <a ng-click="changeImage('mercedes-benz')">Mercedes-Benz</a>
+                    <a ng-click="changeImage('toyota')">Toyota</a>
+        		</ul>
+        	</li>
+    </div>
+
+    <div id = "wrapper">
+        <div class = "filters"> 
+            <form>
+                <li class = "Interests" style = "list-style: none" align = "left"> Interests </li>
+                    <ul>
+                        <a href="#" style = "float: left"> Make Edits </a> <br>
+                    </ul>
+                </li>
+
+                <li class = "distance" style = "list-style: none" align = "left"> Distance </li>
+                    <ul>
+                        <label class = "cb-label"> <input type = "checkbox" name = "distance" value = "1 mile"> 1 mile </label> <br>
+                        <label class = "cb-label"> <input type = "checkbox" name = "distance" value = "5 miles"> 5 miles </label> <br>
+                        <label class = "cb-label"> <input type = "checkbox" name = "distance" value = "10 miles"> 10 miles </label> <br>
+                        <label class = "cb-label"> <input type = "checkbox" name = "distance" value = "20 miles"> 20 miles </label> <br>
+                    </ul>
+                </li>
+
+                <li class = "age" style = "list-style: none" align = "left"> Age Range </li>
+                    <ul>
+                        <label class = "cb-label"> <input type = "checkbox" name = "age" value = "<2 years"> &#60 2 years </label> <br>
+                        <label class = "cb-label"> <input type = "checkbox" name = "age" value = "<5 years"> &#60 5 years </label> <br>
+                        <label class = "cb-label"> <input type = "checkbox" name = "age" value = "<10 years"> &#60 10 years </label> <br>
+                        <label class = "cb-label"> <input type = "checkbox" name = "age" value = "<20 years"> &#60 20 years </label> <br>
+                    </ul>
+                </li>
+
+                <li class = "Race/Nationality" style = "list-style: none" align = "left"> Race/Nationality </li>
+                    <ul>
+                         <label class = "cb-label"> <input type = "checkbox" name = "Race/Nationality" value = "White/Caucasian"> White/Caucasian </label> <br>
+                        <label class = "cb-label"> <input type = "checkbox" name = "Race/Nationality" value = "Black/African-American"> Black/African-American </label> <br>
+                        <label class = "cb-label"> <input type = "checkbox" name = "Race/Nationality" value = "Hispanic or Latino"> Hispanic or Latino </label> <br>
+                        <label class = "cb-label"> <input type = "checkbox" name = "Race/Nationality" value = "Asian or Pacific Islander"> Asian or Pacific Islander </label> <br>
+                        <label class = "cb-label"> <input type = "checkbox" name = "Race/Nationality" value = "American Indian"> American Indian </label> <br>
+                        <label class = "cb-label"> <input type = "checkbox" name = "Race/Nationality" value = "Other"> Other </label> <br>
+                    </ul>
+                </li>   
+            </form>
+        </div>
+
+        <div class = "pics" >
+
+        <table>
+            <tr> 
+                <td> <img src = "{{image1}}" height = "250" width = "250"> </td>
+                <td> <img src = "{{image2}}" height = "250" width = "250"> </td>
+                <td> <img src = "{{image3}}" height = "250" width = "250"> </td>
+            </tr>
+            <tr> 
+                <td> <img src = "{{image4}}" height = "250" width = "250"> </td>
+                <td> <img src = "{{image5}}" height = "250" width = "250"> </td>
+                <td> <img src = "{{image6}}" height = "250" width = "250"> </td>
+            </tr>
+            <tr> 
+                <td> <img src = "{{image7}}" height = "250" width = "250"> </td>
+                <td> <img src = "{{image8}}" height = "250" width = "250"> </td>
+                <td> <img src = "{{image9}}" height = "250" width = "250"> </td>
+            </tr>
+
+        </table>
+        </div>
+    </div>
+	</body>
+</html>
