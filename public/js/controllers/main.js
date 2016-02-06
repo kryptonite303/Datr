@@ -58,6 +58,7 @@ angular.module('todoController', [])
 			Todos.image({text: image}).success(function (data) {
 				$scope[images[index]] = data;
 			});
+
 		}
 
 		$scope.searchImage = function() {
